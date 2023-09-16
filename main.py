@@ -32,9 +32,6 @@ class Game(arcade.Window):
         
         
     def on_update(self, delta_time):
-        """
-        All the logic to move, and the game logic goes here.
-        """
         data = {'w0':None,
                 'w1':None,
                 'w2':None,
