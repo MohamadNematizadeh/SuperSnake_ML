@@ -1,0 +1,4 @@
+tensorflow 
+arcade
+pandas
+numpy
