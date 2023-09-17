@@ -1,7 +1,5 @@
 import arcade
 from scr.color import  Color
-
-
 class Snake(arcade.Sprite):
     def __init__(self, SCREEN_WIDTH, SCREEN_HEIGHT):
         super().__init__()
@@ -17,8 +15,6 @@ class Snake(arcade.Sprite):
         self.score = 0
         self.r = 8
         self.body = []
-
-
     def draw(self):
         for i, part in enumerate(self.body):
             if i % 2 == 0:
@@ -27,7 +23,6 @@ class Snake(arcade.Sprite):
                 arcade.draw_circle_filled(part['x'], part['y'], self.r, self.color1)
                 
         arcade.draw_circle_filled(self.center_x, self.center_y, self.r, self.color1)
- 
 
     def on_update(self, delta_time: float = 1/60):
         self.body.append({'x': self.center_x, 'y': self.center_y})
@@ -35,15 +30,12 @@ class Snake(arcade.Sprite):
             self.body.pop(0)
         self.center_x += self.speed * self.change_x
         self.center_y += self.speed * self.change_y
-
     def eat(self):
             self.score += 1
     def move(self, SCREEN_WIDTH, SCREEN_HEIGHT):
         self.body.append({'x':self.center_x, 'y':self.center_y})
-        # print((self.body[0]["x"]))
         if len(self.body) > self.score:
             self.body.pop(0)
-
         if self.center_x<0:
             self.center_x= SCREEN_WIDTH
         elif self.center_x> SCREEN_WIDTH:
@@ -52,9 +44,9 @@ class Snake(arcade.Sprite):
             self.center_y=SCREEN_HEIGHT
         elif self.center_y>SCREEN_HEIGHT:
             self.center_y=0
-        
         self.center_x += self.change_x*self.speed
         self.center_y += self.change_y*self.speed
+        
     def check_pass_limits(self, game):
         if self.center_x<0 or self.center_x>game.width or self.center_y<0 or self.center_y>game.height:
             arcade.draw_lrtb_rectangle_filled(0, self.width, self.height, 0, arcade.color.BLACK)
