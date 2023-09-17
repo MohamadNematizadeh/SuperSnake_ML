@@ -14,7 +14,6 @@ class Game(arcade.Window):
         self.apple=Apple(SCREEN_WIDTH, SCREEN_HEIGHT)
         self.poo = Poo(SCREEN_WIDTH, SCREEN_HEIGHT)
         self.dataset = []
-        self.wall = 20
 
 
 
@@ -25,9 +24,6 @@ class Game(arcade.Window):
         self.poo.draw()
         arcade.draw_text("Score:", 20 , SCREEN_HEIGHT - 25, Color.black,font_name="calibri")
         arcade.draw_text(str(self.snake.score), 100, SCREEN_HEIGHT -25, Color.black,font_name="calibri")
-        if  self.snake.center_x < self.wall or self.snake.center_x > SCREEN_WIDTH-self.wall or self.snake.center_y < self.wall or self.snake.center_y > SCREEN_HEIGHT-self.wall:
-            arcade.draw_text('GAME OVER',SCREEN_WIDTH // 2 - 100, SCREEN_HEIGHT // 2,arcade.color.BLACK,25)
-            arcade.exit()
         
     def on_update(self, delta_time):
         data = {'w0':None,
