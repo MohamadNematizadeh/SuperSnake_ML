@@ -2,7 +2,6 @@ import arcade
 import pandas as pd
 from scr.apple import Apple
 from scr.snake import Snake
-from scr.poo import Poo
 from scr.color import  Color
 SCREEN_WIDTH = 800
 SCREEN_HEIGHT = 400
