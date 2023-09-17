@@ -2,9 +2,9 @@
 import arcade
 import tensorflow as tf
 import pandas as pd
-from scr.apple import Apple
-from scr.snake import Snake
-from scr.color import  Color
+from src.apple import Apple
+from src.snake import Snake
+from src.color import  Color
 SCREEN_WIDTH = 800
 SCREEN_HEIGHT = 400
 class Game(arcade.Window):
