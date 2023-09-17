@@ -18,7 +18,6 @@ class Game(arcade.Window):
         self.apple.draw()
         arcade.draw_text("Score:", 20 , SCREEN_HEIGHT - 25, Color.black,font_name="calibri")
         arcade.draw_text(str(self.snake.score), 100, SCREEN_HEIGHT -25, Color.black,font_name="calibri")
-        
     def on_update(self, delta_time):
         data = {'w0':None,
                 'w1':None,
@@ -37,22 +36,18 @@ class Game(arcade.Window):
             self.snake.change_x = 0
             self.snake.change_y = -1
             data['direction'] = 2
-
         elif self.snake.center_y < self.apple.center_y:   
             self.snake.change_x = 0
             self.snake.change_y = 1 
             data['direction'] = 0
-
         elif self.snake.center_x > self.apple.center_x:   
             self.snake.change_x = -1
             self.snake.change_y = 0 
             data['direction'] = 3
-
         elif self.snake.center_x < self.apple.center_x:   
             self.snake.change_x = 1
             self.snake.change_y = 0 
             data['direction'] = 1
-
         if self.snake.center_x == self.apple.center_x and self.snake.center_y < self.apple.center_y:
             data['a0'] = 1  
             data['a1'] = 0 
@@ -98,25 +93,19 @@ class Game(arcade.Window):
                 data['b1'] = 0
                 data['b2'] = 0
                 data['b3'] = 1  
-
         self.dataset.append(data)             
-     
         self.snake.on_update(delta_time)
         self.apple.on_update()
-
         if arcade.check_for_collision(self.snake, self.apple):
             self.snake.eat()
             self.apple = Apple(SCREEN_WIDTH, SCREEN_HEIGHT)
         self.snake.check_pass_limits(self)
-   
-
     def on_key_release(self, symbol, modifiers: int):
          if symbol == arcade.key.Q:
              df = pd.DataFrame(self.dataset)
              df.to_csv('dataset/Super_Snake.csv', index=False)
              arcade.close_window()
-             exit(0)
-             
+             exit(0)    
 if __name__ == "__main__":
     window = Game()
     arcade.run()

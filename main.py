@@ -14,7 +14,6 @@ class Game(arcade.Window):
         self.snake = Snake(SCREEN_WIDTH, SCREEN_HEIGHT)
         self.apple = Apple(SCREEN_WIDTH, SCREEN_HEIGHT)
         self.model = tf.keras.models.load_model('weights/SuperSnake.h5')
-
     def on_draw(self):
         arcade.start_render()
         self.snake.draw()
@@ -22,9 +21,6 @@ class Game(arcade.Window):
         arcade.draw_text("Score:", 20 , SCREEN_HEIGHT - 25, Color.black,font_name="calibri")
         arcade.draw_text(str(self.snake.score), 100, SCREEN_HEIGHT -25, Color.black,font_name="calibri")
     def on_update(self, delta_time):
-        """
-        All the logic to move, and the game logic goes here.
-        """
         data = {'w0':None,
                 'w1':None,
                 'w2':None,
@@ -58,12 +54,10 @@ class Game(arcade.Window):
             data['a1'] = 0
             data['a2'] = 0
             data['a3'] = 1
-
         data['w0'] = SCREEN_HEIGHT - self.snake.center_y 
         data['w1'] = SCREEN_WIDTH - self.snake.center_x  
         data['w2'] = self.snake.center_y
         data['w3'] = self.snake.center_x
-
         for part in self.snake.body:
             if self.snake.center_x == part['x'] and self.snake.center_y < part['y']:
                 data['b0'] = 1
@@ -85,14 +79,11 @@ class Game(arcade.Window):
                 data['b1'] = 0
                 data['b2'] = 0
                 data['b3'] = 1  
-
         data = pd.DataFrame(data, index=[1])
         data.fillna(0, inplace=True)
         data = data.values
-
         output = self.model.predict(data) 
         direction = output.argmax()
-
         if direction == 0:
             self.snake.change_x = 0
             self.snake.change_y = 1
@@ -105,21 +96,12 @@ class Game(arcade.Window):
         elif direction == 3:
             self.snake.change_x = -1
             self.snake.change_y = 0       
-
-
         self.snake.on_update(delta_time)
         self.apple.on_update()
-
-        if arcade.check_for_collision(self.snake, self.apple):
-            self.snake.eat()
-            self.apple = Apple(SCREEN_WIDTH, SCREEN_HEIGHT)
-
         if arcade.check_for_collision(self.snake, self.apple):
             self.snake.eat()
             self.apple = Apple(SCREEN_WIDTH, SCREEN_HEIGHT)
         self.snake.check_pass_limits(self)
-    
-       
 if __name__ == "__main__":
     window = Game()
     arcade.run()
