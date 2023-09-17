@@ -4,7 +4,12 @@ Snake game with artificial intelligence in Python using arcade and tensorflow li
  
  ![directions-snake](https://github.com/MohamadNematizadeh/SuperSnake_Ml/blob/main/output/output_Super_Snake_Mohamma.png?raw=true)
 
-
+- loss and accuracy test.
+  |loss | accuracy |
+  | --------- |:---:|
+  |0.0110 | 0.9953 |
+ 
+  
 ## How to install
 `````
 pip install -r requirements.txt
