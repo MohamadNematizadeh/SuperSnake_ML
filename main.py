@@ -2,7 +2,6 @@
 import arcade
 import tensorflow as tf
 import pandas as pd
-import numpy as np
 from scr.apple import Apple
 from scr.snake import Snake
 from scr.poo import  Poo
