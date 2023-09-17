@@ -16,6 +16,8 @@ class Game(arcade.Window):
         self.apple = Apple(SCREEN_WIDTH, SCREEN_HEIGHT)
         self.poo = Poo(SCREEN_WIDTH, SCREEN_HEIGHT)
         self.model = tf.keras.models.load_model('weights/SuperSnake.h5')
+        self.flag = 1
+
 
     def on_draw(self):
         arcade.start_render()
@@ -24,8 +26,8 @@ class Game(arcade.Window):
         self.poo.draw()
         arcade.draw_text("Score:", 20 , SCREEN_HEIGHT - 25, Color.black,font_name="calibri")
         arcade.draw_text(str(self.snake.score), 100, SCREEN_HEIGHT -25, Color.black,font_name="calibri")
-        arcade.draw_lrtb_rectangle_filled(0, self.width, self.height, 0, arcade.color.BLACK)
-        arcade.draw_text("GAME OVER!", self.width//5, self.height//2, arcade.color.RED, 30)
+        if self.flag == 0 :
+            arcade.draw_text("Game Over", 20 , 210  , arcade.color.RED , 80 ,  bold=True)
         
         
     def on_update(self, delta_time):
