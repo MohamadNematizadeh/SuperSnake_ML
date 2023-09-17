@@ -1,5 +1,5 @@
 import arcade
-from scr.color import  Color
+from src.color import  Color
 class Snake(arcade.Sprite):
     def __init__(self, SCREEN_WIDTH, SCREEN_HEIGHT):
         super().__init__()
