@@ -18,6 +18,9 @@ class Game(arcade.Window):
         self.apple.draw()
         arcade.draw_text("Score:", 20 , SCREEN_HEIGHT - 25, Color.black,font_name="calibri")
         arcade.draw_text(str(self.snake.score), 100, SCREEN_HEIGHT -25, Color.black,font_name="calibri")
+        if self.snake.score == -1 or self.snake.center_x<0 or self.snake.center_x > SCREEN_WIDTH or self.snake.center_y < 0 or self.snake.center_y > SCREEN_HEIGHT:
+            arcade.draw_text("Game Over!" , SCREEN_WIDTH // 2 - 80 ,SCREEN_HEIGHT // 2, arcade.color.RED, bold=True, font_size=20)
+            arcade.exit()
     def on_update(self, delta_time):
         data = {'w0':None,
                 'w1':None,
@@ -93,13 +96,11 @@ class Game(arcade.Window):
                 data['b1'] = 0
                 data['b2'] = 0
                 data['b3'] = 1  
-        self.dataset.append(data)             
-        self.snake.on_update(delta_time)
-        self.apple.on_update()
+        self.dataset.append(data)
+        self.snake.move(SCREEN_WIDTH, SCREEN_HEIGHT)
         if arcade.check_for_collision(self.snake, self.apple):
             self.snake.eat()
             self.apple = Apple(SCREEN_WIDTH, SCREEN_HEIGHT)
-        self.snake.check_pass_limits(self)
     def on_key_release(self, symbol, modifiers: int):
          if symbol == arcade.key.Q:
              df = pd.DataFrame(self.dataset)

@@ -13,10 +13,10 @@ model = tf.keras.models.Sequential([
     tf.keras.layers.Dense(30, activation='relu'),
     tf.keras.layers.Dense(4, activation='softmax')
 ])
-# 80/80 [==============================] - 0s 1ms/step - loss: 0.0222 - accuracy: 0.9909
-# 20/20 [==============================] - 0s 1ms/step - loss: 0.0110 - accuracy: 0.9953
-# loss test: 0.011022300459444523
-# accuracy test: 0.9952830076217651
+# 52/52 [==============================] - 0s 2ms/step - loss: 0.0226 - accuracy: 0.9933
+# 13/13 [==============================] - 0s 3ms/step - loss: 0.0461 - accuracy: 0.9903
+# loss test: 0.04605969414114952
+# accuracy test: 0.990314781665802
 model.compile(optimizer=tf.keras.optimizers.Adam(learning_rate=0.002),
               loss= tf.keras.losses.sparse_categorical_crossentropy,
               metrics=['accuracy'])

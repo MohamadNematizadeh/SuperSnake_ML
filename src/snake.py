@@ -6,7 +6,7 @@ class Snake(arcade.Sprite):
         self.speed = 8
         self.center_x = SCREEN_WIDTH // 2
         self.center_y = SCREEN_HEIGHT // 2
-        self.change_x = 1
+        self.change_x = 0
         self.change_y = 0
         self.width = 16
         self.height = 16
@@ -47,7 +47,7 @@ class Snake(arcade.Sprite):
         self.center_x += self.change_x*self.speed
         self.center_y += self.change_y*self.speed
         
-    def check_pass_limits(self, game):
-        if self.center_x<0 or self.center_x>game.width or self.center_y<0 or self.center_y>game.height:
+    def check_pass_limits(self,SCREEN_WIDTH, SCREEN_HEIGHT):
+        if self.center_x<0 or self.center_x>SCREEN_WIDTH or self.center_y<0 or self.center_y>SCREEN_HEIGHT:
             arcade.draw_lrtb_rectangle_filled(0, self.width, self.height, 0, arcade.color.BLACK)
             arcade.draw_text("GAME OVER!", self.width//5, self.height//2, arcade.color.RED, 30)
