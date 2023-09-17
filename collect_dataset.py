@@ -12,16 +12,11 @@ class Game(arcade.Window):
         arcade.set_background_color(Color.khaki)
         self.snake=Snake(SCREEN_WIDTH, SCREEN_HEIGHT)
         self.apple=Apple(SCREEN_WIDTH, SCREEN_HEIGHT)
-        self.poo = Poo(SCREEN_WIDTH, SCREEN_HEIGHT)
         self.dataset = []
-
-
-
     def on_draw(self):
         arcade.start_render()
         self.snake.draw()
         self.apple.draw()
-        self.poo.draw()
         arcade.draw_text("Score:", 20 , SCREEN_HEIGHT - 25, Color.black,font_name="calibri")
         arcade.draw_text(str(self.snake.score), 100, SCREEN_HEIGHT -25, Color.black,font_name="calibri")
         
@@ -113,9 +108,6 @@ class Game(arcade.Window):
         if arcade.check_for_collision(self.snake, self.apple):
             self.snake.eat()
             self.apple = Apple(SCREEN_WIDTH, SCREEN_HEIGHT)
-        if arcade.check_for_collision(self.snake, self.poo):
-            self.snake.eat_poo(self.poo)
-            self.poo = Poo(SCREEN_WIDTH, SCREEN_HEIGHT) 
         self.snake.check_pass_limits(self)
    
 
