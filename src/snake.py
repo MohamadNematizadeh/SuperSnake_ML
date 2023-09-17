@@ -38,15 +38,6 @@ class Snake(arcade.Sprite):
 
     def eat(self):
             self.score += 1
-    def eat_poo(self , poo):
-        del poo
-        self.score -= 1
-        if self.score < 0 :
-            print("score :",self.score)
-            arcade.draw_text("Game Over", 20 , 210  , arcade.color.RED , 80 ,  bold=True)
-            arcade.close_window()
-            exit(0)
-        print("score :",self.score) 
     def move(self, SCREEN_WIDTH, SCREEN_HEIGHT):
         self.body.append({'x':self.center_x, 'y':self.center_y})
         # print((self.body[0]["x"]))
