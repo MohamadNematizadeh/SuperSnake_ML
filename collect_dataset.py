@@ -14,7 +14,8 @@ class Game(arcade.Window):
         self.apple=Apple(SCREEN_WIDTH, SCREEN_HEIGHT)
         self.poo = Poo(SCREEN_WIDTH, SCREEN_HEIGHT)
         self.dataset = []
-        self.flag = 1
+        self.wall = 20
+
 
 
     def on_draw(self):
@@ -24,9 +25,9 @@ class Game(arcade.Window):
         self.poo.draw()
         arcade.draw_text("Score:", 20 , SCREEN_HEIGHT - 25, Color.black,font_name="calibri")
         arcade.draw_text(str(self.snake.score), 100, SCREEN_HEIGHT -25, Color.black,font_name="calibri")
-        if self.flag == 0 :
-            arcade.draw_text("Game Over", 20 , 210  , arcade.color.RED , 80 ,  bold=True)
-        
+        if  self.snake.center_x < self.wall or self.snake.center_x > SCREEN_WIDTH-self.wall or self.snake.center_y < self.wall or self.snake.center_y > SCREEN_HEIGHT-self.wall:
+            arcade.draw_text('GAME OVER',SCREEN_WIDTH // 2 - 100, SCREEN_HEIGHT // 2,arcade.color.BLACK,25)
+            arcade.exit()
         
     def on_update(self, delta_time):
         data = {'w0':None,
@@ -118,7 +119,9 @@ class Game(arcade.Window):
             self.apple = Apple(SCREEN_WIDTH, SCREEN_HEIGHT)
         if arcade.check_for_collision(self.snake, self.poo):
             self.snake.eat_poo(self.poo)
-            self.poo = Poo(SCREEN_WIDTH, SCREEN_HEIGHT)    
+            self.poo = Poo(SCREEN_WIDTH, SCREEN_HEIGHT) 
+        self.snake.check_pass_limits(self)
+   
 
     def on_key_release(self, symbol, modifiers: int):
          if symbol == arcade.key.Q:

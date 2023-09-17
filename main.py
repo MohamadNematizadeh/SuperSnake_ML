@@ -129,6 +129,8 @@ class Game(arcade.Window):
         if arcade.check_for_collision(self.snake, self.poo):
             self.snake.eat_poo(self.poo)
             self.poo = Poo(SCREEN_WIDTH, SCREEN_HEIGHT)
+        self.snake.check_pass_limits(self)
+    
        
 if __name__ == "__main__":
     window = Game()
