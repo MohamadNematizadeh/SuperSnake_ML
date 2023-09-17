@@ -1,4 +1,5 @@
 tensorflow 
 arcade
 pandas
-numpy
+matplotlib
+scikit-learn
