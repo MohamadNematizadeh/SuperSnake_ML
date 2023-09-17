@@ -13,7 +13,6 @@ class Game(arcade.Window):
         self.snake=Snake(SCREEN_WIDTH, SCREEN_HEIGHT)
         self.apple=Apple(SCREEN_WIDTH, SCREEN_HEIGHT)
         self.poo = Poo(SCREEN_WIDTH, SCREEN_HEIGHT)
-        self.game_status="run"
         self.dataset = []
 
     def on_draw(self):
@@ -23,9 +22,8 @@ class Game(arcade.Window):
         self.poo.draw()
         arcade.draw_text("Score:", 20 , SCREEN_HEIGHT - 25, Color.black,font_name="calibri")
         arcade.draw_text(str(self.snake.score), 100, SCREEN_HEIGHT -25, Color.black,font_name="calibri")
-        if self.game_status=="Game Over":
-            arcade.draw_lrtb_rectangle_filled(0, self.width, self.height, 0, arcade.color.BLACK)
-            arcade.draw_text("GAME OVER!", self.width//5, self.height//2, arcade.color.RED, 30)
+        arcade.draw_lrtb_rectangle_filled(0, self.width, self.height, 0, arcade.color.BLACK)
+        arcade.draw_text("GAME OVER!", self.width//5, self.height//2, arcade.color.RED, 30)
         
     def on_update(self, delta_time):
         data = {'w0':None,
