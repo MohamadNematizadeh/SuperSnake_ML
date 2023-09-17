@@ -2,7 +2,6 @@
 import arcade
 import tensorflow as tf
 import pandas as pd
-import numpy as np
 from scr.apple import Apple
 from scr.snake import Snake
 from scr.poo import  Poo
@@ -17,7 +16,6 @@ class Game(arcade.Window):
         self.apple = Apple(SCREEN_WIDTH, SCREEN_HEIGHT)
         self.poo = Poo(SCREEN_WIDTH, SCREEN_HEIGHT)
         self.model = tf.keras.models.load_model('weights/SuperSnake.h5')
-        self.game_status="run"
 
     def on_draw(self):
         arcade.start_render()
@@ -26,12 +24,14 @@ class Game(arcade.Window):
         self.poo.draw()
         arcade.draw_text("Score:", 20 , SCREEN_HEIGHT - 25, Color.black,font_name="calibri")
         arcade.draw_text(str(self.snake.score), 100, SCREEN_HEIGHT -25, Color.black,font_name="calibri")
-        if self.game_status=="Game Over":
-            arcade.draw_lrtb_rectangle_filled(0, self.width, self.height, 0, arcade.color.BLACK)
-            arcade.draw_text("GAME OVER!", self.width//5, self.height//2, arcade.color.RED, 30)
+        arcade.draw_lrtb_rectangle_filled(0, self.width, self.height, 0, arcade.color.BLACK)
+        arcade.draw_text("GAME OVER!", self.width//5, self.height//2, arcade.color.RED, 30)
         
         
     def on_update(self, delta_time):
+        """
+        All the logic to move, and the game logic goes here.
+        """
         data = {'w0':None,
                 'w1':None,
                 'w2':None,
